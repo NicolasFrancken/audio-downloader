@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import downloadVimeo from "@/app/utils/downloadVimeo";
+import vimeoDownload from "@/app/utils/vimeoDownload";
 import convertVidToMp3 from "@/app/utils/convertVidToMp3";
 
 export async function POST(req) {
@@ -11,10 +11,10 @@ export async function POST(req) {
   const configLink = `https://player.vimeo.com/video/${videoId[0]}/config`;
 
   try {
-    await downloadVimeo(configLink);
+    await vimeoDownload(configLink);
     await convertVidToMp3();
 
-    return NextResponse.json({ message: "Audio Downloaded" });
+    return NextResponse.json({ message: "Audio downloaded" });
   } catch (e) {
     return NextResponse.json(
       { message: "There was an error" },

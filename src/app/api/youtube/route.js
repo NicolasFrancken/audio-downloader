@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import youtubeDownload from "@/app/utils/youtubeDownload";
-import convertToMp3 from "@/app/utils/converStreamToMp3";
+import convertToMp3 from "@/app/utils/convertStreamToMp3";
 
 export async function POST(req) {
   const { url } = await req.json();

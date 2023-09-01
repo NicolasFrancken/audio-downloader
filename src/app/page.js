@@ -31,7 +31,6 @@ export default function Home() {
           },
         }
       );
-
       setIsLoading(false);
       setText(res.data.message);
     } catch (e) {

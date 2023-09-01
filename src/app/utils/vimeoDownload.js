@@ -2,7 +2,7 @@ import https from "https";
 import fs from "fs";
 import path from "path";
 
-export default async function downloadVimeo(configLink) {
+export default async function vimeoDownload(configLink) {
   const videoConfig = await new Promise((resolve, reject) => {
     https.get(configLink, (page) => {
       let result = "";
