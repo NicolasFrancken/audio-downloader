@@ -1,0 +1,39 @@
+import https from "https";
+import fs from "fs";
+import path from "path";
+
+export default async function downloadVimeo(configLink) {
+  const videoConfig = await new Promise((resolve, reject) => {
+    https.get(configLink, (page) => {
+      let result = "";
+      page.on("data", (data) => {
+        result += data;
+      });
+      page.on("error", (e) => {
+        reject();
+      });
+      page.on("end", () => {
+        resolve(JSON.parse(result));
+      });
+    });
+  });
+
+  const videoQualityItems = videoConfig.request.files.progressive;
+
+  const targetItem = videoQualityItems[1];
+  const targetVideoFileUrl = targetItem.url;
+  const output = path.join(__dirname, "../../../../../src/temp/tempVid.mp4");
+
+  await new Promise((resolve, reject) => {
+    https.get(targetVideoFileUrl, (vid) => {
+      console.log("\nDownloading audio\n");
+      vid.pipe(fs.createWriteStream(output));
+      vid.on("error", (e) => {
+        reject();
+      });
+      vid.on("end", () => {
+        resolve();
+      });
+    });
+  });
+}
