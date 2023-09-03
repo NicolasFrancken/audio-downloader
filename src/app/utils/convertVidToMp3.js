@@ -3,9 +3,9 @@ import path from "path";
 
 import deleteMp4 from "./deleteMp4";
 
-export default async function convertVidToMp3() {
+export default async function convertVidToMp3(vimeoStream) {
   await new Promise((resolve, reject) => {
-    const input = path.join(__dirname, "../../../../../src/temp/tempVid.mp4");
+    // const input = path.join(__dirname, "../../../../../src/temp/tempVid.mp4");
     const output = path.join(
       __dirname,
       "../../../../../src/uploads/VimeoVideo.mp3"
